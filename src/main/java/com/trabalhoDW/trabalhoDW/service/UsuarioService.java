@@ -26,9 +26,13 @@ public List<Usuario> listarTodos(){
 public Usuario buscarPorId(int id){
     return usuarioDAO.findOne(id);
 }
-public void salvaUsuario(Usuario usuario){
-    usuarioDAO.save(usuario);
-}    
 
+public void addAmigo(int idUsuario, Usuario amigo){
+    Usuario usuario = buscarPorId(idUsuario);
+    usuario.adicionaAmigo(amigo);
+}
+public void salvaUsuario(Usuario usuario){
+    usuarioDAO.saveAndFlush(usuario);
+}
 
 }

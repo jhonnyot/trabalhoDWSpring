@@ -7,7 +7,9 @@ package com.trabalhoDW.trabalhoDW.modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -20,33 +22,40 @@ public class Nota implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    private long id;
+    @GeneratedValue
+    private int id;
+    @ElementCollection
     private List<Long> notaConhecido;
+    @ElementCollection
     private List<Long> notaHospedagem;
+    @ElementCollection
     private List<Long> notaEsporte;
     @OneToOne
     private Usuario usuario;
 
+    public Nota() {
+    }
+
     private long getNotaConhecido() {
         long media = 0;
-        for (Long l : notaConhecido) {
-            media += l;
+        for (Long iterador : notaConhecido) {
+            media += iterador;
         }
         return media / notaConhecido.size();
     }
 
     private long getNotaHospedagem() {
         long media = 0;
-        for (Long l : notaHospedagem) {
-            media += l;
+        for (Long iterador : notaHospedagem) {
+            media += iterador;
         }
         return media / notaHospedagem.size();
     }
 
     private long getNotaEsporte() {
         long media = 0;
-        for (Long l : notaEsporte) {
-            media += l;
+        for (Long iterador : notaEsporte) {
+            media += iterador;
         }
         return media / notaEsporte.size();
     }

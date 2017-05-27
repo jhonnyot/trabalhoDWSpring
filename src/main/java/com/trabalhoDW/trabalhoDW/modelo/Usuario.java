@@ -6,9 +6,11 @@
 package com.trabalhoDW.trabalhoDW.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -22,13 +24,13 @@ public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private long id;
+    @GeneratedValue
+    private int id;
     private String CPF;
     private String telefone;
     private String endereco;
     private String email;
     private String nome;
-
     @OneToMany
     private List<Usuario> amigos;
 
@@ -43,11 +45,16 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
-
-    public void setId(Integer id) {
+    public void inicializaAmigos(){
+        amigos = new ArrayList<>();
+    }
+    public void adicionaAmigo(Usuario usuario){
+        amigos.add(usuario);
+    }
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -16,6 +16,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
-    @Query("SELECT * FROM Usuario u where u.nome = ?1")
+    @Query("SELECT u FROM Usuario u where u.nome = ?1")
     public Usuario buscarPorNome(String nome);
 }

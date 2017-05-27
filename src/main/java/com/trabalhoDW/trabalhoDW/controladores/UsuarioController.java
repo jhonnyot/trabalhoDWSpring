@@ -24,7 +24,12 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @RequestMapping("/usuarios")
-    public void usuarios() {
+    public List<Usuario> usuarios() {
+        testeHibernate();
+        return usuarioService.listarTodos();
+    }
+
+    public void testeHibernate() {
 
         Usuario u1 = new Usuario();
         Usuario u2 = new Usuario();
@@ -41,10 +46,18 @@ public class UsuarioController {
         usuarioService.salvaUsuario(u3);
         usuarioService.salvaUsuario(u4);
 
-        List<Usuario> users = usuarioService.listarTodos();
-        for (Usuario u : users) {
-            string(u);
-        }
+        u1.inicializaAmigos();
+        u2.inicializaAmigos();
+        u3.inicializaAmigos();
+        u4.inicializaAmigos();
+        
+        usuarioService.addAmigo(u1.getId(), u2);
+        usuarioService.addAmigo(u2.getId(), u3);
+        usuarioService.addAmigo(u3.getId(), u4);
+        
+        
+        
+
     }
 
     public String string(Usuario u) {

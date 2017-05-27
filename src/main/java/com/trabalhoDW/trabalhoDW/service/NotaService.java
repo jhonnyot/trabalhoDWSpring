@@ -6,6 +6,7 @@
 package com.trabalhoDW.trabalhoDW.service;
 
 import com.trabalhoDW.trabalhoDW.daos.NotaDAO;
+import com.trabalhoDW.trabalhoDW.modelo.Nota;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,12 +15,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class NotaService {
+
     private NotaDAO notaDAO;
 
-    
+    public void notaPorUsuario(long idUsuario, int idNota) {
+        Nota nota = buscarPorId(idNota);
+    }
 
-
-
-
-
+    public Nota buscarPorId(int id) {
+        return notaDAO.findOne(id);
+    }
 }
