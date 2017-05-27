@@ -5,9 +5,8 @@
  */
 package com.trabalhoDW.trabalhoDW.daos;
 
-import com.trabalhoDW.trabalhoDW.modelo.Usuario;
+import com.trabalhoDW.trabalhoDW.modelo.Nota;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author JP
  */
 @Repository
-public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
-    @Query("SELECT * FROM Usuario u where u.nome = ?1")
-    public Usuario buscarPorNome(String nome);
+public interface NotaDAO extends JpaRepository<Nota, Integer> {
+    
 }

@@ -24,8 +24,31 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @RequestMapping("/usuarios")
-    public List<Usuario> usuarios() {
-        return usuarioService.listarTodos();
+    public void usuarios() {
+
+        Usuario u1 = new Usuario();
+        Usuario u2 = new Usuario();
+        Usuario u3 = new Usuario();
+        Usuario u4 = new Usuario();
+
+        u1.setNome("Guilherme");
+        u2.setNome("Joao");
+        u3.setNome("Campos");
+        u4.setNome("Salle");
+
+        usuarioService.salvaUsuario(u1);
+        usuarioService.salvaUsuario(u2);
+        usuarioService.salvaUsuario(u3);
+        usuarioService.salvaUsuario(u4);
+
+        List<Usuario> users = usuarioService.listarTodos();
+        for (Usuario u : users) {
+            string(u);
+        }
+    }
+
+    public String string(Usuario u) {
+        return u.getNome();
     }
 
     @RequestMapping("/usuario")
