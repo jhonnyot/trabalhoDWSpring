@@ -9,9 +9,12 @@ import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import com.trabalhoDW.trabalhoDW.service.UsuarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -22,12 +25,25 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-
-    @RequestMapping("/usuarios")
-    public List<Usuario> usuarios() {
-        testeHibernate();
-        return usuarioService.listarTodos();
+//    @RequestMapping("/usuarios")
+//    public List<Usuario> usuarios() {
+//        testeHibernate();
+//        return usuarioService.listarTodos();
+//    }
+    
+    @GetMapping("/usuarios")
+    public ModelAndView listar() {
+        ModelAndView modelAndView = new ModelAndView("usuarios");
+        modelAndView.addObject("usuarios", usuarioService.listarTodos());
+        modelAndView.addObject(new Usuario());
+        return modelAndView;
     }
+    @PostMapping("/usuarios")
+	public String salvar(Usuario usuario) {
+		this.usuarioService.salvaUsuario(usuario);
+		return "redirect:/convidados";
+	}
+
 
     public void testeHibernate() {
 
@@ -45,23 +61,16 @@ public class UsuarioController {
         usuarioService.salvaUsuario(u2);
         usuarioService.salvaUsuario(u3);
         usuarioService.salvaUsuario(u4);
+//
+//        u1.inicializaAmigos();
+//        u2.inicializaAmigos();
+//        u3.inicializaAmigos();
+//        u4.inicializaAmigos();
+//        
+//        usuarioService.addAmigo(u1.getId(), u2);
+//        usuarioService.addAmigo(u2.getId(), u3);
+//        usuarioService.addAmigo(u3.getId(), u4);
 
-        u1.inicializaAmigos();
-        u2.inicializaAmigos();
-        u3.inicializaAmigos();
-        u4.inicializaAmigos();
-        
-        usuarioService.addAmigo(u1.getId(), u2);
-        usuarioService.addAmigo(u2.getId(), u3);
-        usuarioService.addAmigo(u3.getId(), u4);
-        
-        
-        
-
-    }
-
-    public String string(Usuario u) {
-        return u.getNome();
     }
 
     @RequestMapping("/usuario")

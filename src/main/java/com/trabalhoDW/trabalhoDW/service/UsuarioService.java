@@ -17,22 +17,25 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UsuarioService {
+
     @Autowired
     private UsuarioDAO usuarioDAO;
-    
-public List<Usuario> listarTodos(){
-    return usuarioDAO.findAll();
-}
-public Usuario buscarPorId(int id){
-    return usuarioDAO.findOne(id);
-}
 
-public void addAmigo(int idUsuario, Usuario amigo){
-    Usuario usuario = buscarPorId(idUsuario);
-    usuario.adicionaAmigo(amigo);
-}
-public void salvaUsuario(Usuario usuario){
-    usuarioDAO.saveAndFlush(usuario);
-}
+    public List<Usuario> listarTodos() {
+        return usuarioDAO.findAll();
+    }
+
+    public Usuario buscarPorId(int id) {
+        return usuarioDAO.findOne(id);
+    }
+
+    public void addAmigo(int idUsuario, Usuario amigo) {
+        Usuario usuario = buscarPorId(idUsuario);
+        usuario.adicionaAmigo(amigo);
+    }
+
+    public void salvaUsuario(Usuario usuario) {
+        usuarioDAO.saveAndFlush(usuario);
+    }
 
 }
