@@ -5,34 +5,23 @@
  */
 package com.trabalhoDW.trabalhoDW.controladores;
 
-import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
- * @author guilherme
+ * @author Salle
  */
 @Controller
-public class HomeController {
-
+public class ErroController {
     @Autowired
     private LoginController loginController;
-
-    @RequestMapping(value = {"/index", "/", ""})
-    public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView("index");
+    @RequestMapping("/erros")
+    public ModelAndView erro(){
+        ModelAndView modelAndView = new ModelAndView("erros");
         modelAndView.addObject("isLogado", loginController.isLogado());
         return modelAndView;
     }
-
-    @RequestMapping("/home")
-    public ModelAndView home() {
-        ModelAndView modelAndView = new ModelAndView("home");
-        return modelAndView;
-    }
-
 }

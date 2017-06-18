@@ -26,7 +26,8 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    private String CPF;
+//    private String CPF;
+    private String senha;
     private String telefone;
     private String endereco;
     private String email;
@@ -37,12 +38,13 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String CPF, String telefone, String endereco, String email, String nome) {
-        this.CPF = CPF;
-        this.telefone = telefone;
+    public Usuario(String telefone, String endereco, String email, String nome, String senha) {
+//        this.CPF = CPF;
+        this.telefone = telefone; 
         this.endereco = endereco;
         this.email = email;
         this.nome = nome;
+        this.senha = senha;
     }
 
     public int getId() {
@@ -58,12 +60,20 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getCPF() {
-        return CPF;
+//    public String getCPF() {
+//        return CPF;
+//    }
+//
+//    public void setCPF(String CPF) {
+//        this.CPF = CPF;
+//    }
+
+    public String getSenha() {
+        return senha;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getTelefone() {

@@ -38,4 +38,19 @@ public class UsuarioService {
         usuarioDAO.saveAndFlush(usuario);
     }
 
+    public boolean loginValido(int id, String senha) {
+        if (usuarioDAO.login(id, senha) != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public int retornaId() {
+        if (!usuarioDAO.retornaId().isEmpty()) {
+            return usuarioDAO.retornaId().get(0).getId();
+        } else {
+            return -1;
+        }
+    }
+
 }

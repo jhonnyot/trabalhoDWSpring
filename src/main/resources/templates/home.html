@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <title>home</title>
+    </head>
+    <body>          
+        <div th:replace="cabecalhoLogado :: cabecalhoLogado"/>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div th:replace="menu :: menu"/>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="page-header">
+                            <h1 th:inline="text">Olá, [[${#httpServletRequest.getParameter('user')}]]!</h1>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

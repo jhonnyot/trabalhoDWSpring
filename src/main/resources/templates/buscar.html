@@ -1,0 +1,35 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <title>buscar</title>
+    </head>
+    <body>          
+        <div th:replace="cabecalhoLogado :: cabecalhoLogado"/>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <%@ include file="menu.jsp" %>
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="page-header">
+                            <h1>Olá, <%= user.getNome()%>!</h1>
+                        </div>
+                        <form method="post" role="form" action="BuscaServlet">
+                            <div class="form-group">
+                                <label for="nome">Procurar </label>
+                                <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Procurar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

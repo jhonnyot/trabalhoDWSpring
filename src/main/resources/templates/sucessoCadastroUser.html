@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <title>Trabalho-DW</title>
+    </head>
+
+    <div th:replace="cabecalhoLogin :: cabecalhoLogin"/>
+    <div class="page-header">
+        <h1>Sucesso!</h1>                
+    </div> 
+    <p>Parabéns! Seu cadastro foi efetuado.</p>
+    <p>Seu número de identificação é: <span th:text="${user}"/></p> 
+    <br/>
+</html>
