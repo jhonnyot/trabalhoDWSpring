@@ -29,9 +29,8 @@ public class UsuarioService {
         return usuarioDAO.findOne(id);
     }
 
-    public void addAmigo(int idUsuario, Usuario amigo) {
-        Usuario usuario = buscarPorId(idUsuario);
-        usuario.adicionaAmigo(amigo);
+    public void addAmigo(int idUsuario, int idAmigo) {
+        usuarioDAO.addAmigo(idUsuario, idAmigo);
     }
 
     public void salvaUsuario(Usuario usuario) {
