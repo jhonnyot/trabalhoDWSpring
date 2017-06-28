@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author JP
+ * @author guilherme
  */
 @Service
 public class UsuarioService {
@@ -43,10 +43,12 @@ public class UsuarioService {
         }
         return false;
     }
-
-    public int retornaId() {
-        if (!usuarioDAO.retornaId().isEmpty()) {
-            return usuarioDAO.retornaId().get(0).getId();
+    public Usuario buscarPorNome(String nome){
+        return usuarioDAO.buscarPorNome(nome);
+    }
+    public int retornaUltimoId() {
+        if (!usuarioDAO.retornaListaOrdenadoPorId().isEmpty()) {
+            return usuarioDAO.retornaListaOrdenadoPorId().get(0).getId();
         } else {
             return -1;
         }

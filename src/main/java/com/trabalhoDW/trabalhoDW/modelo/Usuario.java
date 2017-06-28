@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author sti
+ * @author guilherme
  */
 @Entity
 public class Usuario implements Serializable {
@@ -26,7 +26,6 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-//    private String CPF;
     private String senha;
     private String telefone;
     private String endereco;
@@ -39,7 +38,6 @@ public class Usuario implements Serializable {
     }
 
     public Usuario(String telefone, String endereco, String email, String nome, String senha) {
-//        this.CPF = CPF;
         this.telefone = telefone; 
         this.endereco = endereco;
         this.email = email;
@@ -59,14 +57,6 @@ public class Usuario implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-
-//    public String getCPF() {
-//        return CPF;
-//    }
-//
-//    public void setCPF(String CPF) {
-//        this.CPF = CPF;
-//    }
 
     public String getSenha() {
         return senha;

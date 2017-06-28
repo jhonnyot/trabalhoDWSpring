@@ -33,7 +33,7 @@ public class CadastroUserController {
     @GetMapping("/sucessoCadastroUser")
     public ModelAndView sucessoCadastro() {
         ModelAndView modelAndView = new ModelAndView("sucessoCadastroUser");
-        Usuario usuario = usuarioService.buscarPorId(usuarioService.retornaId());
+        Usuario usuario = usuarioService.buscarPorId(usuarioService.retornaUltimoId());
         modelAndView.addObject("user", usuario.getId());
         modelAndView.addObject("isLogado", loginController.isLogado());
         return modelAndView;
@@ -42,10 +42,10 @@ public class CadastroUserController {
     @GetMapping("/cadastroUser")
     public ModelAndView mostraCadastroUsuario() {
         ModelAndView modelAndView = new ModelAndView("cadastroUser");
-        modelAndView.addObject("userid", usuarioService.retornaId());
+        modelAndView.addObject("userid", usuarioService.retornaUltimoId());
         modelAndView.addObject("isLogado", loginController.isLogado());
         return modelAndView;
-    }
+    }   
 
     @PostMapping("/cadastroUser")
     public ModelAndView cadastroUsuario(HttpServletRequest request, HttpServletResponse response)

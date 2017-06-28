@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 
 /**
  *
- * @author JP
+ * @author guilherme
  */
 @Entity
 public class Nota implements Serializable {

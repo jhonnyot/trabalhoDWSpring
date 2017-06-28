@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author JP
+ * @author guilherme
  */
 @Repository
 public interface NotaDAO extends JpaRepository<Nota, Integer> {

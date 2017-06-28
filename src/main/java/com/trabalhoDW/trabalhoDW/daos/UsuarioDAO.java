@@ -24,7 +24,7 @@ public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
     public Usuario login(int id, String senha);
 
     @Query("SELECT u FROM Usuario u ORDER BY u.id DESC")
-    public List<Usuario> retornaId();
+    public List<Usuario> retornaListaOrdenadoPorId();
 
     @Query(nativeQuery = true, value = "INSERT into usuario_amigos(usuario_id, amigos_id) values(?1,?2)")
     public void addAmigo(int idUsuario, int idAmigo);

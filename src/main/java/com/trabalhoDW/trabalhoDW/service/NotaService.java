@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author JP
+ * @author guilherme
  */
 @Service
 public class NotaService {

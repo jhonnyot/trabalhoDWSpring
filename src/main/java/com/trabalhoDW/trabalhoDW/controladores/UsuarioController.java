@@ -7,6 +7,8 @@ package com.trabalhoDW.trabalhoDW.controladores;
 
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import com.trabalhoDW.trabalhoDW.service.UsuarioService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,14 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
- * @author JP
+ * @author guilherme
  */
 @RestController
-public class UsuarioController  {
+public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-
 
     @GetMapping("/usuarios")
     public ModelAndView listar() {
@@ -32,7 +33,7 @@ public class UsuarioController  {
         modelAndView.addObject(new Usuario());
         return modelAndView;
     }
-  
+
     @PostMapping("/usuarios")
     public String salvar(Usuario usuario) {
         this.usuarioService.salvaUsuario(usuario);
@@ -44,4 +45,21 @@ public class UsuarioController  {
         return usuarioService.buscarPorId(id);
     }
 
+    @PostMapping("/buscar")
+    public ModelAndView buscar(HttpServletRequest request, HttpServletResponse response) {
+        String nome = request.getParameter("nome");
+        Usuario usuario = usuarioService.buscarPorNome(nome);
+        if (usuario == null) {
+            return new ModelAndView("redirect:/erros");
+        }
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("usuario", usuario);
+        return mav;
+    }
+
+    @GetMapping("/buscar")
+    public ModelAndView buscarGet() {
+        ModelAndView model = new ModelAndView("buscar");
+        return model;
+    }
 }
