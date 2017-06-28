@@ -6,25 +6,30 @@
         <div th:fragment="cabecalhoLogin"> 
             <nav class="navbar navbar-inverse navbar-fixed-top">
                 <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <a class="navbar-brand" href="index.html">Trabalho-DW</a>
                     </div>
 
                     <div>
-                        <form class="navbar-form navbar-right" role="search" th:action="@{/cabecalhoLogin.html}" method="post">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Identificação" name="userId"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Senha" name="senha"/>
-                            </div>
+                        <!--                        <form class="navbar-form navbar-right" role="search" th:action="@{/cabecalhoLogin.html}" method="post">
+                                                    <div class="form-group">
+                                                        <input type="text" name="username" id="username" class="form-control"
+                                                               placeholder="Identificação" required="true" autofocus="true"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="password" name="password" id="password" class="form-control"
+                                                               placeholder="Senha" required="true"/>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Login</button>
+                                                </form>-->
+                        <a class="navbar-form navbar-right" href="login.html">
                             <button type="submit" class="btn btn-primary">Login</button>
-                        </form>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
+                        </a>
+                    </div>
+                </div>
             </nav>
         </div> 
+
         <br/><br/>
     </body>
 </html>

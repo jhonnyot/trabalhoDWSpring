@@ -7,8 +7,12 @@ package com.trabalhoDW.trabalhoDW.service;
 
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import com.trabalhoDW.trabalhoDW.daos.UsuarioDAO;
+import com.trabalhoDW.trabalhoDW.modelo.Papel;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,6 +24,10 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioDAO usuarioDAO;
+    @Autowired
+    private PapelService papelService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<Usuario> listarTodos() {
         return usuarioDAO.findAll();
@@ -34,6 +42,10 @@ public class UsuarioService {
     }
 
     public void salvaUsuario(Usuario usuario) {
+        usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
+        usuario.setAtivo(1);
+        Papel papel = papelService.buscarPorPapel("USER");
+        usuario.setPapel(new HashSet<Papel>(Arrays.asList(papel)));
         usuarioDAO.saveAndFlush(usuario);
     }
 
