@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Erro 403 - Acesso Negado</h1>
+        <div th:inline="text">O usuário '[[${#httpServletRequest.remoteUser}]]' 
+            não tem permissão para acessar esta página.</div>
+    </div>
+
+</div>
+<!-- /.container -->
+
+</body>
+</html>

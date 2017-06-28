@@ -5,10 +5,12 @@
  */
 package com.trabalhoDW.trabalhoDW.controladores;
 
+import com.trabalhoDW.trabalhoDW.modelo.Papel;
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import com.trabalhoDW.trabalhoDW.service.UsuarioService;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -5,8 +5,13 @@
  */
 package com.trabalhoDW.trabalhoDW.controladores;
 
+import com.trabalhoDW.trabalhoDW.modelo.Usuario;
+import com.trabalhoDW.trabalhoDW.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,19 +22,22 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
     @Autowired
-    private LoginController loginController;
-
+    private UsuarioService usuarioService;
+    
     @RequestMapping(value = {"/index", "/", ""})
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("isLogado", loginController.isLogado());
         return modelAndView;
     }
 
-    @RequestMapping("/home")
+    @GetMapping("/home")
     public ModelAndView home() {
-        ModelAndView modelAndView = new ModelAndView("home");
-        return modelAndView;
+        ModelAndView mav = new ModelAndView("home");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
+        mav.addObject("userName", "Bem-vindo, " + usr.getNome() + "!");
+        mav.setViewName("/home");
+        return mav;
     }
 
 }

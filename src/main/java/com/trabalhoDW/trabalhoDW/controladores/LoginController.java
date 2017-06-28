@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,35 +34,27 @@ public class LoginController extends HttpServlet {
         return logado;
     }
 
-    @PostMapping("/cabecalhoLogin")
-    public ModelAndView logar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        int id = Integer.parseInt(request.getParameter("userId"));
-        String senha = request.getParameter("senha");
-
-        Usuario user = usuarioService.buscarPorId(id);
-        if (user != null && (senha == null ? user.getSenha() == null : senha.equals(user.getSenha()))) {
-//            request.getSession().setAttribute("userId", user);
-//            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/home");
-//            if (dispatcher != null) {
-//                dispatcher.forward(request, response);
-//                logado = true;
-//            }
-            ModelAndView mav = new ModelAndView("redirect:/home");
-            mav.addObject("user", user.getNome());
-            return mav;
-        } else {
-            String erro = "Login incorreto. Tente de novo... ";
-//            request.setAttribute("erro", erro);
-//
-//            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index");
-//            if (dispatcher != null) {
-//                dispatcher.forward(request, response);
-//                logado = false;
-//            }
-            return new ModelAndView("redirect:/erros");
-
-        }
+    @GetMapping("/login")
+    public ModelAndView login() {
+        ModelAndView modelAndView = new ModelAndView("login");
+        return modelAndView;
     }
+//    @PostMapping("/login")
+//    public ModelAndView logar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//
+//        int id = Integer.parseInt(request.getParameter("userId"));
+//        String senha = request.getParameter("senha");
+//
+//        Usuario user = usuarioService.buscarPorId(id);
+//        if (user != null && (senha == null ? user.getSenha() == null : senha.equals(user.getSenha()))) {
+//            ModelAndView mav = new ModelAndView("redirect:/home");
+//            mav.addObject("user", user.getNome());
+//            return mav;
+//        } else {
+//            String erro = "Login incorreto. Tente de novo... ";
+//            return new ModelAndView("redirect:/erros");
+//
+//        }
+//    }
 
 }

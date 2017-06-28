@@ -7,12 +7,20 @@ package com.trabalhoDW.trabalhoDW.modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -25,12 +33,17 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue
+    @Column(name = "usuario_id")
     private int id;
     private String senha;
     private String telefone;
     private String endereco;
     private String email;
     private String nome;
+    private int ativo;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
+    Set<Papel> papel;
     @OneToMany
     private List<Usuario> amigos;
 
@@ -43,23 +56,44 @@ public class Usuario implements Serializable {
         this.email = email;
         this.nome = nome;
         this.senha = senha;
+
     }
 
     public int getId() {
         return id;
     }
-    public void inicializaAmigos(){
+
+    public void inicializaAmigos() {
         amigos = new ArrayList<>();
     }
-    public void adicionaAmigo(Usuario usuario){
+
+
+    public void adicionaAmigo(Usuario usuario) {
         amigos.add(usuario);
     }
+
     public void setId(int id) {
         this.id = id;
     }
 
     public String getSenha() {
         return senha;
+    }
+
+    public int getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
+    }
+
+    public Set<Papel> getPapel() {
+        return papel;
+    }
+
+    public void setPapel(Set<Papel> papel) {
+        this.papel = papel;
     }
 
     public void setSenha(String senha) {
@@ -105,7 +139,6 @@ public class Usuario implements Serializable {
     public void setAmigos(List<Usuario> amigos) {
         this.amigos = amigos;
     }
-    
 
     @Override
     public boolean equals(Object obj) {
