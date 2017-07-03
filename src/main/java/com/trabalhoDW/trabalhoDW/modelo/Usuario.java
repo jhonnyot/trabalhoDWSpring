@@ -46,6 +46,10 @@ public class Usuario implements Serializable {
     Set<Papel> papel;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Usuario> amigos;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Usuario> amigoshospedados;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Usuario> amigosEsportes;
 
     public Usuario() {
     }
