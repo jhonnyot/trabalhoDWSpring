@@ -60,7 +60,6 @@ public class CadastroUserController {
         String telefone = request.getParameter("telefone");
         String senha = request.getParameter("senha");
 
-        //validação dos dados inseridos
         boolean nomeIsValid = (nome != null && !nome.equals(""));
         boolean telefoneIsValid = (telefone != null && !telefone.equals(""));
         boolean emailIsValid = (email != null && !email.equals(""));
@@ -69,19 +68,10 @@ public class CadastroUserController {
 
         boolean cadastroIsValid = nomeIsValid && telefoneIsValid && emailIsValid && enderecoIsValid && senhaIsValid;
 
-        //se os dados forem validados, cria cadastro  
         if (cadastroIsValid) {
             Usuario usuario = new Usuario(telefone, endereco, email, nome, senha);
             usuarioService.salvaUsuario(usuario);
             return new ModelAndView("redirect:/sucessoCadastroUser");
-//        } else {
-//            //se os dados não forem validados, retorna para a página anterior
-//            String erro = "Houve algum problema com seu cadastro! Por favor, preencha o formulário abaixo novamente conforme as recomendações em cada campo.";
-//            request.setAttribute("erro", erro);
-//            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cadastroUser");
-//            if (dispatcher != null) {
-//                dispatcher.forward(request, response);
-//            }
         }
         return new ModelAndView("redirect:/erros");
     }

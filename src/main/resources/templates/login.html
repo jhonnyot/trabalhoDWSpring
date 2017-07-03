@@ -8,19 +8,19 @@
     <body>          
         <div class="jumbotron">
             <form th:action="@{/login}" method="POST" class="form-signin">
-			<h3 class="form-signin-heading">Login de Usuário</h3>
-			<br/>
-			 
-			<input type="text" id="userId" name="userId"  th:placeholder="Identificação"
-				class="form-control" /> <br/> 
-			<input type="password"  th:placeholder="Senha"
-				id="senha" name="senha" class="form-control" /> <br /> 
-				
-			<div align="center" th:if="${param.error}">
-				<p style="font-size: 20; color: #FF1C19;">Identificação ou senha incorretos.</p>
-			</div>
-			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
-</form>
+                <h3 class="form-signin-heading">Login de Usuário</h3>
+                <br/>
+
+                <input type="text" id="userId" name="userId"  th:placeholder="Identificação"
+                       class="form-control" /> <br/> 
+                <input type="password"  th:placeholder="Senha"
+                       id="senha" name="senha" class="form-control" /> <br /> 
+
+                <div align="center" th:if="${param.error}">
+                    <p style="font-size: 20; color: #FF1C19;">Identificação ou senha incorretos.</p>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+            </form>
         </div>
     </body>
 </html>

@@ -44,7 +44,7 @@ public class Usuario implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
     Set<Papel> papel;
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Usuario> amigos;
 
     public Usuario() {

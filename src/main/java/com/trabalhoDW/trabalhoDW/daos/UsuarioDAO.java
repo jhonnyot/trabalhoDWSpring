@@ -7,7 +7,9 @@ package com.trabalhoDW.trabalhoDW.daos;
 
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +28,8 @@ public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
     @Query("SELECT u FROM Usuario u ORDER BY u.id DESC")
     public List<Usuario> retornaListaOrdenadoPorId();
 
-    @Query(nativeQuery = true, value = "INSERT into usuario_amigos(usuario_id, amigos_id) values(?1,?2)")
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO usuario_amigos(usuario_usuario_id, amigos_usuario_id) values(?1,?2)", nativeQuery = true)
     public void addAmigo(int idUsuario, int idAmigo);
 }

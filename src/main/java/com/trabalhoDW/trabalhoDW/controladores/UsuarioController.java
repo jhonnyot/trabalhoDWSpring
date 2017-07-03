@@ -10,6 +10,8 @@ import com.trabalhoDW.trabalhoDW.service.UsuarioService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,40 +28,52 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    
+    private int usrToAdd;
 
-    @GetMapping("/usuarios")
-    public ModelAndView listar() {
-        ModelAndView modelAndView = new ModelAndView("usuarios");
-        modelAndView.addObject(new Usuario());
-        return modelAndView;
-    }
-
-    @PostMapping("/usuarios")
-    public String salvar(Usuario usuario) {
-        this.usuarioService.salvaUsuario(usuario);
-        return "redirect:/convidados";
-    }
-
+//    @GetMapping("/usuarios")
+//    public ModelAndView listar() {
+//        ModelAndView modelAndView = new ModelAndView("usuarios");
+//        modelAndView.addObject(new Usuario());
+//        return modelAndView;
+//    }
+//
+//    @PostMapping("/usuarios")
+//    public String salvar(Usuario usuario) {
+//        this.usuarioService.salvaUsuario(usuario);
+//        return "redirect:/convidados";
+//    }
     @RequestMapping("/usuario")
     public Usuario usuario(@RequestParam(value = "id", defaultValue = "0") int id) {
         return usuarioService.buscarPorId(id);
     }
 
-    @PostMapping("/buscar")
+    @RequestMapping("/buscar")
     public ModelAndView buscar(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
         String nome = request.getParameter("nome");
         Usuario usuario = usuarioService.buscarPorNome(nome);
-        if (usuario == null) {
-            return new ModelAndView("redirect:/erros");
-        }
         ModelAndView mav = new ModelAndView();
-        mav.addObject("usuario", usuario);
+        mav.addObject("usrName", "Olá, " + usr.getNome() + "!");
+        if (usuario == null) {
+//            return new ModelAndView("redirect:/erros");
+            mav.addObject("notFound", true);
+            return mav;
+        } else {
+            mav.addObject("usuario", usuario);
+            mav.addObject("notFound", false);
+            this.usrToAdd = usuario.getId();
+        }
         return mav;
     }
-
-    @GetMapping("/buscar")
-    public ModelAndView buscarGet() {
-        ModelAndView model = new ModelAndView("buscar");
-        return model;
+    
+    @PostMapping("/addAmg")
+    public ModelAndView addAmg() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
+        usuarioService.addAmigo(usr.getId(), usrToAdd);
+        return new ModelAndView("redirect:/amigos");
     }
+
 }

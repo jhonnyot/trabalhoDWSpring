@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-md-9">
                         <div class="page-header">
-                            <h1 th:inline="text">Olá, usuário de drogas pesadas </h1>
+                            <h1 th:text="${usrName}"></h1>
                         </div>
                         <form method="post" role="form" th:action="@{/buscar}">
                             <div class="form-group">
@@ -25,8 +25,11 @@
                             <button type="submit" class="btn btn-primary">Procurar</button>
                         </form>
                     </div>
-                    <div class="container">
-                        Usuario Encontrado = <h1 th:text= "${usuario.getNome()}"></h1>
+                    <div class="container" th:if="${not notFound}">
+                        Usuario Encontrado = <p th:text= "${usuario.getNome()}"></p>
+                        <form method="post" th:action="@{/addAmg}">
+                            <button type="submit" class="btn btn-primary">Adicionar</button>
+                        </form>
                     </div>
                 </div>
             </div>

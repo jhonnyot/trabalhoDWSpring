@@ -39,22 +39,4 @@ public class LoginController extends HttpServlet {
         ModelAndView modelAndView = new ModelAndView("login");
         return modelAndView;
     }
-//    @PostMapping("/login")
-//    public ModelAndView logar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-//        int id = Integer.parseInt(request.getParameter("userId"));
-//        String senha = request.getParameter("senha");
-//
-//        Usuario user = usuarioService.buscarPorId(id);
-//        if (user != null && (senha == null ? user.getSenha() == null : senha.equals(user.getSenha()))) {
-//            ModelAndView mav = new ModelAndView("redirect:/home");
-//            mav.addObject("user", user.getNome());
-//            return mav;
-//        } else {
-//            String erro = "Login incorreto. Tente de novo... ";
-//            return new ModelAndView("redirect:/erros");
-//
-//        }
-//    }
-
 }
