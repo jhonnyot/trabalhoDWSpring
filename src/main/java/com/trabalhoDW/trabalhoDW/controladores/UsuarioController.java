@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,18 +30,6 @@ public class UsuarioController {
     
     private int usrToAdd;
 
-//    @GetMapping("/usuarios")
-//    public ModelAndView listar() {
-//        ModelAndView modelAndView = new ModelAndView("usuarios");
-//        modelAndView.addObject(new Usuario());
-//        return modelAndView;
-//    }
-//
-//    @PostMapping("/usuarios")
-//    public String salvar(Usuario usuario) {
-//        this.usuarioService.salvaUsuario(usuario);
-//        return "redirect:/convidados";
-//    }
     @RequestMapping("/usuario")
     public Usuario usuario(@RequestParam(value = "id", defaultValue = "0") int id) {
         return usuarioService.buscarPorId(id);
@@ -57,7 +44,6 @@ public class UsuarioController {
         ModelAndView mav = new ModelAndView();
         mav.addObject("usrName", "Olá, " + usr.getNome() + "!");
         if (usuario == null) {
-//            return new ModelAndView("redirect:/erros");
             mav.addObject("notFound", true);
             return mav;
         } else {

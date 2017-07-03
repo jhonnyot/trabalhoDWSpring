@@ -29,13 +29,6 @@ public class AmigosController {
         ModelAndView mav = new ModelAndView("amigos");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
-//        int i = 0;
-//        for (Usuario user : usr.getAmigos()) {
-//            String nomeAmigos = "Usr";
-//            mav.addObject(nomeAmigos.concat(Integer.toString(i)), user.getNome());
-//            i++;
-//        }
-//        mav.addObject("qtdAmigos", i);
         mav.addObject("amigos", usr.getAmigos());
         return mav;
     }
