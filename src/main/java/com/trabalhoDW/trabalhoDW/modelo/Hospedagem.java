@@ -26,12 +26,80 @@ public class Hospedagem implements Serializable {
     @GeneratedValue
     @Column(name = "hospedagem_id")
     private int id;
-    private int numeroHospedeiros;
-    private int numeroEspostistas;
-    @Type(type="date")
+    private int idHospedeiro;
+    private int numeroHospedes;
+    private int numeroEsportistas;
+    @Type(type = "date")
     private Date dataInicial;
-    @Type(type="date")
+    @Type(type = "date")
     private Date dataFinal;
     private boolean aprovado;
+
+    public Hospedagem() {
+    }
+
+    public Hospedagem(int numeroHospedes, int numeroEsportistas, Date dataInicial, Date dataFinal) {
+        this.numeroHospedes = numeroHospedes;
+        this.numeroEsportistas = numeroEsportistas;
+        this.dataInicial = dataInicial;
+        this.dataFinal = dataFinal;
+    }
     
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdHospedeiro() {
+        return idHospedeiro;
+    }
+
+    public void setIdHospedeiro(int idHospedeiro) {
+        this.idHospedeiro = idHospedeiro;
+    }
+
+    public int getNumeroHospedes() {
+        return numeroHospedes;
+    }
+
+    public void setNumeroHospedes(int numeroHospedes) {
+        this.numeroHospedes = numeroHospedes;
+    }
+
+    public int getNumeroEsportistas() {
+        return numeroEsportistas;
+    }
+
+    public void setNumeroEsportistas(int numeroEsportistas) {
+        this.numeroEsportistas = numeroEsportistas;
+    }
+
+    public Date getDataInicial() {
+        return dataInicial;
+    }
+
+    public void setDataInicial(Date dataInicial) {
+        this.dataInicial = dataInicial;
+    }
+
+    public Date getDataFinal() {
+        return dataFinal;
+    }
+
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
+    }
+
+    public boolean isAprovado() {
+        return aprovado;
+    }
+
+    public void setAprovado(boolean aprovado) {
+        this.aprovado = aprovado;
+    }
+
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <title>Hospedeiro</title>
+    </head>
+    <body>
+        <div class="jumbotron">  
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div th:replace="menu :: menu"/>
+                    </div>
+                    <div class="col-md-9">
+                        <div th:replace="cabecalhoLogado :: cabecalhoLogado"/>
+                        <div class="list-group">
+                            <div class="page-header">
+                                <h1>Solicitações de Hospedagem</h1>
+                            </div>
+                            <span th:each="hosp : ${lista}">
+                                <form method="POST" th:action="@{/hospedeiro}">
+                                    <label>Número de Hóspedes</label>
+                                    <p th:text="${hosp.numeroHospedes}"/>
+                                    <label>Número de Hóspedes Esportistas</label>
+                                    <p th:text="${hosp.numeroEsportistas}"/>
+                                    <label>Data Início</label>
+                                    <p th:text="${hosp.dataInicial}"/>
+                                    <label>Data Fim</label>
+                                    <p th:text="${hosp.dataFinal}"/>
+                                    <button type="submit" name="aceitar" id="aceitar" class="btn btn-primary">Aceitar</button>
+                                </form>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
