@@ -50,6 +50,9 @@ public class Usuario implements Serializable {
     private List<Usuario> amigosEsportes;
     @OneToOne(cascade = CascadeType.ALL)
     private Nota nota;
+    private boolean isDisponivel;
+    private String pais;
+    private String cidade;
 
     public Usuario() {
     }
@@ -60,7 +63,17 @@ public class Usuario implements Serializable {
         this.email = email;
         this.nome = nome;
         this.senha = senha;
+    }
 
+    public Usuario(String senha, String telefone, String endereco, String email, String nome, String pais, String cidade, boolean isDisponivel) {
+        this.senha = senha;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.email = email;
+        this.nome = nome;
+        this.pais = pais;
+        this.cidade = cidade;
+        this.isDisponivel = isDisponivel;
     }
 
     public int getId() {

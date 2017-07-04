@@ -51,7 +51,7 @@ public class CadastroUserController {
         modelAndView.addObject("userid", usuarioService.retornaUltimoId());
         modelAndView.addObject("isLogado", loginController.isLogado());
         return modelAndView;
-    }   
+    }
 
     @PostMapping("/cadastroUser")
     public ModelAndView cadastroUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -61,19 +61,32 @@ public class CadastroUserController {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String endereco = request.getParameter("endereco");
+        String pais = request.getParameter("pais");
+        String cidade = request.getParameter("cidade");
         String telefone = request.getParameter("telefone");
         String senha = request.getParameter("senha");
+        String disponivel = request.getParameter("disponivel");
 
         boolean nomeIsValid = (nome != null && !nome.equals(""));
         boolean telefoneIsValid = (telefone != null && !telefone.equals(""));
         boolean emailIsValid = (email != null && !email.equals(""));
         boolean enderecoIsValid = (endereco != null && !endereco.equals(""));
         boolean senhaIsValid = (senha != null && !senha.equals(""));
+        boolean cidadeIsValid = (cidade != null && !cidade.equals(""));
+        boolean paisIsValid = (pais != null && !pais.equals(""));
+        boolean isDisponivel = false;
+        if ((disponivel != null && !disponivel.equals("")) && (disponivel.equals("s") || disponivel.equals("n"))) {
+            if (disponivel.equals("s")) {
+                isDisponivel = true;
+            } else {
+                isDisponivel = false;
+            }
+        }
 
-        boolean cadastroIsValid = nomeIsValid && telefoneIsValid && emailIsValid && enderecoIsValid && senhaIsValid;
+        boolean cadastroIsValid = nomeIsValid && telefoneIsValid && emailIsValid && enderecoIsValid && senhaIsValid && cidadeIsValid && paisIsValid;
 
         if (cadastroIsValid) {
-            Usuario usuario = new Usuario(telefone, endereco, email, nome, senha);
+            Usuario usuario = new Usuario(senha, telefone, endereco, email, nome, pais, cidade, isDisponivel);
             usuarioService.salvaUsuario(usuario);
             return new ModelAndView("redirect:/sucessoCadastroUser");
         }
