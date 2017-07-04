@@ -7,6 +7,7 @@ package com.trabalhoDW.trabalhoDW.service;
 
 import com.trabalhoDW.trabalhoDW.daos.NotaDAO;
 import com.trabalhoDW.trabalhoDW.modelo.Nota;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,13 +17,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class NotaService {
 
+    @Autowired
     private NotaDAO notaDAO;
+    @Autowired
+    private UsuarioService usuarioService;
 
-    public void notaPorUsuario(long idUsuario, int idNota) {
-        Nota nota = buscarPorId(idNota);
+    public Nota notaPorUsuario(int idUsuario) {
+        Nota nota = notaDAO.getNotaUsuario(usuarioService.buscarPorId(idUsuario));
+        return nota;
     }
 
-    public Nota buscarPorId(int id) {
-        return notaDAO.findOne(id);
+    public Nota notaPorId(int idNota) {
+        Nota nota = notaDAO.findOne(idNota);
+        return nota;
+    }
+
+    public void salvaNota(Nota nota) {
+        notaDAO.saveAndFlush(nota);
     }
 }

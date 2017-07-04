@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -47,6 +48,8 @@ public class Usuario implements Serializable {
     private List<Usuario> amigoshospedados;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Usuario> amigosEsportes;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Nota nota;
 
     public Usuario() {
     }
@@ -139,6 +142,10 @@ public class Usuario implements Serializable {
 
     public void setAmigos(List<Usuario> amigos) {
         this.amigos = amigos;
+    }
+    
+    public void setNota(Nota nota) {
+        this.nota = nota;
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package com.trabalhoDW.trabalhoDW.daos;
 
+import com.trabalhoDW.trabalhoDW.modelo.Nota;
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -27,6 +28,9 @@ public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
 
     @Query("SELECT u FROM Usuario u ORDER BY u.id DESC")
     public List<Usuario> retornaListaOrdenadoPorId();
+    
+    @Query("SELECT n from Usuario u, Nota n where n.id = u.nota")
+    public Nota buscaNotas();
 
     @Modifying
     @Transactional

@@ -7,6 +7,7 @@ package com.trabalhoDW.trabalhoDW.service;
 
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import com.trabalhoDW.trabalhoDW.daos.UsuarioDAO;
+import com.trabalhoDW.trabalhoDW.modelo.Nota;
 import com.trabalhoDW.trabalhoDW.modelo.Papel;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -28,6 +29,8 @@ public class UsuarioService {
     private PapelService papelService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private NotaService notaService;
 
     public List<Usuario> listarTodos() {
         return usuarioDAO.findAll();
@@ -45,8 +48,15 @@ public class UsuarioService {
         usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
         usuario.setAtivo(1);
         Papel papel = papelService.buscarPorPapel("USER");
+        Nota nota = new Nota();
+        notaService.salvaNota(nota);
         usuario.setPapel(new HashSet<Papel>(Arrays.asList(papel)));
+        usuario.setNota(nota);
         usuarioDAO.saveAndFlush(usuario);
+    }
+    
+    public Nota buscaNotas() {
+       return usuarioDAO.buscaNotas();
     }
 
     public boolean loginValido(int id, String senha) {
@@ -55,9 +65,11 @@ public class UsuarioService {
         }
         return false;
     }
-    public Usuario buscarPorNome(String nome){
+
+    public Usuario buscarPorNome(String nome) {
         return usuarioDAO.buscarPorNome(nome);
     }
+
     public int retornaUltimoId() {
         if (!usuarioDAO.retornaListaOrdenadoPorId().isEmpty()) {
             return usuarioDAO.retornaListaOrdenadoPorId().get(0).getId();

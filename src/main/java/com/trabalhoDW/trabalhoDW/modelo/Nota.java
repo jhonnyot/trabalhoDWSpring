@@ -6,12 +6,15 @@
 package com.trabalhoDW.trabalhoDW.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
@@ -31,33 +34,65 @@ public class Nota implements Serializable {
     @ElementCollection
     private List<Long> notaEsporte;
     @OneToOne
+    @PrimaryKeyJoinColumn
     private Usuario usuario;
 
+    public void addNotaConhecido(long notaConhecido) {
+        this.notaConhecido.add(notaConhecido);
+    }
+
+    public void addNotaHospedagem(long notaHospedagem) {
+        this.notaHospedagem.add(notaHospedagem);
+    }
+
+    public void addNotaEsporte(long notaEsporte) {
+        this.notaEsporte.add(notaEsporte);
+    }
+
     public Nota() {
+        this.notaConhecido = new ArrayList<>();
+        this.notaEsporte = new ArrayList<>();
+        this.notaHospedagem = new ArrayList<>();
     }
 
-    private long getNotaConhecido() {
+    public long getNotaConhecido() {
         long media = 0;
-        for (Long iterador : notaConhecido) {
-            media += iterador;
+        if (this.notaConhecido.size() > 0) {
+            for (Long iterador : notaConhecido) {
+                media += iterador;
+            }
+            return media / notaConhecido.size();
+        } else {
+            return 0;
         }
-        return media / notaConhecido.size();
     }
 
-    private long getNotaHospedagem() {
+    public long getNotaHospedagem() {
         long media = 0;
-        for (Long iterador : notaHospedagem) {
-            media += iterador;
+        if (this.notaHospedagem.size() > 0) {
+            for (Long iterador : notaHospedagem) {
+                media += iterador;
+            }
+            return media / notaHospedagem.size();
+        } else {
+            return 0;
         }
-        return media / notaHospedagem.size();
     }
 
-    private long getNotaEsporte() {
+    public long getNotaEsporte() {
         long media = 0;
-        for (Long iterador : notaEsporte) {
-            media += iterador;
+        if (this.notaEsporte.size() > 0) {
+            for (Long iterador : notaEsporte) {
+                media += iterador;
+            }
+            return media / notaEsporte.size();
+        } else {
+            return 0;
         }
-        return media / notaEsporte.size();
+    }
+
+    public int getId() {
+        return this.id;
     }
 
 }

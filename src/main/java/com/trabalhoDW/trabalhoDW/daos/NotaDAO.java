@@ -6,6 +6,7 @@
 package com.trabalhoDW.trabalhoDW.daos;
 
 import com.trabalhoDW.trabalhoDW.modelo.Nota;
+import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface NotaDAO extends JpaRepository<Nota, Integer> {
-//    @Query("SELECT n FROM Nota n where n.idUsuario = ?1")
-//    public Nota getNotaUsuario(int idUsuario);
+    @Query("SELECT n FROM Nota n where n.usuario = ?1")
+    public Nota getNotaUsuario(Usuario usuario);
 }

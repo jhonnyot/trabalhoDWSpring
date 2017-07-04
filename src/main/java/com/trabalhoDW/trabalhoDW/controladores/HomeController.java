@@ -6,6 +6,7 @@
 package com.trabalhoDW.trabalhoDW.controladores;
 
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
+import com.trabalhoDW.trabalhoDW.service.NotaService;
 import com.trabalhoDW.trabalhoDW.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private NotaService notaService;
     
     @RequestMapping(value = {"/index", "/", ""})
     public ModelAndView index() {
@@ -36,6 +39,9 @@ public class HomeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
         mav.addObject("userName", "Bem-vindo, " + usr.getNome() + "!");
+        mav.addObject("notaHospedagem", "Nota de Hospedagem: " + usuarioService.buscaNotas().getNotaHospedagem());
+        mav.addObject("notaAmigo", "Nota de Conhecidos: " + usuarioService.buscaNotas().getNotaConhecido());
+        mav.addObject("notaEsporte", "Nota de Prática Esportiva: " + usuarioService.buscaNotas().getNotaEsporte());
         mav.setViewName("/home");
         return mav;
     }

@@ -5,8 +5,10 @@
  */
 package com.trabalhoDW.trabalhoDW.controladores;
 
+import com.trabalhoDW.trabalhoDW.modelo.Nota;
 import com.trabalhoDW.trabalhoDW.modelo.Papel;
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
+import com.trabalhoDW.trabalhoDW.service.NotaService;
 import com.trabalhoDW.trabalhoDW.service.UsuarioService;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -31,6 +33,8 @@ public class CadastroUserController {
     private UsuarioService usuarioService;
     @Autowired
     private LoginController loginController;
+    @Autowired
+    private NotaService notaService;
 
     @GetMapping("/sucessoCadastroUser")
     public ModelAndView sucessoCadastro() {
