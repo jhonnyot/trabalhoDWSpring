@@ -8,11 +8,13 @@ package com.trabalhoDW.trabalhoDW.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -27,12 +29,9 @@ public class Nota implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    @ElementCollection
-    private List<Long> notaConhecido;
-    @ElementCollection
-    private List<Long> notaHospedagem;
-    @ElementCollection
-    private List<Long> notaEsporte;
+    private ArrayList<Long> notaConhecido;
+    private ArrayList<Long> notaHospedagem;
+    private ArrayList<Long> notaEsporte;
     @OneToOne
     @PrimaryKeyJoinColumn
     private Usuario usuario;

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
@@ -8,35 +7,32 @@
         <title>Avaliação</title>
     </head>
     <body>
-        <div class="jumbotron"/>  
-        <div class="page-header">
-            <h1>Avaliação de Usuário 
-                <small>Preencha os campos abaixo para avaliar um usuário.</small>
-            </h1>
-            <small>Caso não tenha realizado alguma das atividades, deixe o campo em branco.</small>
-        </div> 
-        <form method="post" role="form" th:action="@{/avaliacoes.html}">
-            <div class="form-group">
-                <label for="nome">Nome: </label>
-                <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome"/>
-            </div>
-            <div class="form-group">
-                <label for="notaHospedagem">Nota da Hospedagem</label>
-                <input type="text" class="form-control" id="notaHospedagem" name="notaHospedagem"/>
-            </div>
-            <div class="form-group">
-                <label for="notaConhecido">Nota de Conhecido </label>
-                <input type="text" class="form-control" id="notaConhecido" name="notaConhecido"/>
-            </div>
-            <div class="form-group">
-                <label for="notaEsporte">Nota de Esporte </label>
-                <input type="text" class="form-control" id="notaEsporte" name="notaEsporte"/>
-            </div>     
-            <div class="form-group">
-                <label for="senha">Escolha uma senha: </label>
-                <input type="text" class="form-control" id="senha" placeholder="Digite sua senha" name="senha"/>
+        <div class="jumbotron">  
+            <div class="page-header">
+                <h1>Avaliação de Usuário 
+                    <small>Preencha os campos abaixo para avaliar um usuário.</small>
+                    <small>Caso não tenha realizado alguma das atividades, deixe o campo em branco.</small>
+                </h1>
             </div> 
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
-        </form>
+            <form method="post" role="form" th:action="@{/avaliacoes.html}">
+                <div class="form-group">
+                    <label for="username">Nome: </label>
+                    <input type="text" class="form-control" id="username" name="username"/>
+                </div>
+                <div class="form-group">
+                    <label for="notaHospedagem">Nota da Hospedagem</label>
+                    <input type="text" class="form-control" id="notaHospedagem" name="notaHospedagem"/>
+                </div>
+                <div class="form-group">
+                    <label for="notaConhecido">Nota de Conhecido </label>
+                    <input type="text" class="form-control" id="notaConhecido" name="notaConhecido"/>
+                </div>
+                <div class="form-group">
+                    <label for="notaEsporte">Nota de Esporte </label>
+                    <input type="text" class="form-control" id="notaEsporte" name="notaEsporte"/>
+                </div>     
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
     </body>
 </html>
