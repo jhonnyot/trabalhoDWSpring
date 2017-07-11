@@ -17,20 +17,16 @@
                         <div th:replace="cabecalhoLogado :: cabecalhoLogado"/>
                         <div class="list-group">
                             <div class="page-header">
-                                <h1>Solicitações de Hospedagem</h1>
+                                <h1>Solicitações de Saída</h1>
                             </div>
-                            <span th:each="hosp : ${lista}">
-                                <form th:if="${hosp.aprovado} != true" method="POST" th:action="@{/hospedeiro}">
+                            <span th:each="esp : ${lista}">
+                                <form th:if="${esp.aprovado} != true" method="POST" th:action="@{/solicitacoesEsporte}">
                                     <label>Identificação:</label>
-                                    <input type="text" id="hospedagemId" name="hospedagemId" th:attr="value = ${hosp.id}" readonly="readonly"/><br/>
-                                    <label>Número de Hóspedes</label>
-                                    <span th:text="${hosp.numeroHospedes}"/><br/>
-                                    <label>Número de Hóspedes Esportistas</label>
-                                    <span th:text="${hosp.numeroEsportistas}"/><br/>
+                                    <input type="text" id="solicitacaoId" name="solicitacaoId" th:attr="value = ${esp.id}" readonly="readonly"/><br/>
+                                    <label>Nome do Solicitante</label>
+                                    <span th:text="${nomeSol}"/><br/>
                                     <label>Data Início</label>
-                                    <span th:text="${hosp.dataInicial}"/><br/>
-                                    <label>Data Fim</label>
-                                    <span th:text="${hosp.dataFinal}"/><br/>
+                                    <span th:text="${esp.dataInicial}"/><br/>
                                     <button type="submit" name="aceitar" id="aceitar" class="btn btn-primary">Aceitar</button>
                                 </form>
                             </span>
