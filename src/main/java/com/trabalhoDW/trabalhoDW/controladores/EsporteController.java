@@ -34,8 +34,6 @@ public class EsporteController {
     private UsuarioService usuarioService;
     
     @GetMapping("/solicitacoesEsporte")
-
-    @GetMapping("/solitacoesEsporte")
     public ModelAndView solicitacoesGet() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
@@ -55,7 +53,7 @@ public class EsporteController {
         return mav;
     }
 
-    @PostMapping("/aceitar")
+    @PostMapping("/solicitacoesEsporte")
     public ModelAndView solicitacoesPost(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Esporte e = esporteService.buscarPorId(Integer.parseInt(request.getParameter("solicitacaoId")));

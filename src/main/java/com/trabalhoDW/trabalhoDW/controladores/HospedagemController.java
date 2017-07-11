@@ -53,7 +53,7 @@ public class HospedagemController {
         return mav;
     }
 
-    @PostMapping("/aceitar")
+    @PostMapping("/hospedeiro")
     public ModelAndView hospedeiroPost(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Hospedagem h = hospedagemService.buscarPorId(Integer.parseInt(request.getParameter("hospedagemId")));
