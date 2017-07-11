@@ -44,8 +44,8 @@ public class Esporte implements Serializable {
     public void setAvaliado(boolean avaliado) {
         this.avaliado = avaliado;
     }
-    
-    public Esporte(Date data, int idSolicitante, int idSolicitado) {
+
+    public Esporte(Date data, int idSolicitante, int idSolicitado, String nome) {
         this.data = data;
         this.idSolicitante = idSolicitante;
         this.idSolicitado = idSolicitado;
