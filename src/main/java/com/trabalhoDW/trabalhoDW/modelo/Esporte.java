@@ -31,10 +31,19 @@ public class Esporte implements Serializable {
     private int idSolicitante;
     private int idSolicitado;
     private boolean aprovado;
+    private boolean avaliado;
 
     public Esporte() {
     }
 
+    public boolean isAvaliado() {
+        return avaliado;
+    }
+
+    public void setAvaliado(boolean avaliado) {
+        this.avaliado = avaliado;
+    }
+    
     public Esporte(Date data, int idSolicitante, int idSolicitado) {
         this.data = data;
         this.idSolicitante = idSolicitante;

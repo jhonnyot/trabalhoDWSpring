@@ -6,8 +6,10 @@
 package com.trabalhoDW.trabalhoDW.controladores;
 
 import com.trabalhoDW.trabalhoDW.modelo.Hospedagem;
+import com.trabalhoDW.trabalhoDW.modelo.Nota;
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import com.trabalhoDW.trabalhoDW.service.HospedagemService;
+import com.trabalhoDW.trabalhoDW.service.NotaService;
 import com.trabalhoDW.trabalhoDW.service.UsuarioService;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +34,8 @@ public class HospedagemController {
     private HospedagemService hospedagemService;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private NotaService notaService;
 
     @GetMapping("/hospedeiro")
     public ModelAndView hospedeiroGet() {
@@ -51,6 +55,26 @@ public class HospedagemController {
         ModelAndView mav = new ModelAndView("hospedeiro");
         mav.addObject("lista", solicitacoes);
         return mav;
+    }
+
+    @PostMapping("/hospedagensAceitas")
+    public ModelAndView avaliacao(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
+        String notaEsporte = request.getParameter("notaHospedagem");
+        String usuario = request.getParameter("username");
+        Usuario user = usuarioService.buscarPorNome(usuario);
+        Nota nota = usuarioService.buscaNotas(usr.getId());
+        Hospedagem h = new Hospedagem();
+        if (user != null) {
+            if (!notaEsporte.equals("")) {
+                nota.addNotaEsporte(Long.parseLong(notaEsporte));
+            }
+            notaService.salvaNota(nota);
+            
+            return new ModelAndView("redirect:/home");
+        }
+        return new ModelAndView("redirect:/erros");
     }
 
     @PostMapping("/aceitar")

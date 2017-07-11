@@ -6,8 +6,10 @@
 package com.trabalhoDW.trabalhoDW.controladores;
 
 import com.trabalhoDW.trabalhoDW.modelo.Esporte;
+import com.trabalhoDW.trabalhoDW.modelo.Nota;
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import com.trabalhoDW.trabalhoDW.service.EsporteService;
+import com.trabalhoDW.trabalhoDW.service.NotaService;
 import com.trabalhoDW.trabalhoDW.service.UsuarioService;
 import java.util.Date;
 import java.util.List;
@@ -32,8 +34,10 @@ public class EsporteController {
     private EsporteService esporteService;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private NotaService notaService;
 
-    @GetMapping("/solitacoesEsporte")
+    @GetMapping("/solicitacoesEsporte")
     public ModelAndView solicitacoesGet() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
@@ -42,6 +46,26 @@ public class EsporteController {
         mav.addObject("lista", solicitacoes);
         return mav;
     }
+
+    @PostMapping("/esportesAceitos")
+    public ModelAndView avaliacao(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
+        String notaEsporte = request.getParameter("notaEsporte");
+        String usuario = request.getParameter("username");
+        Usuario user = usuarioService.buscarPorNome(usuario);
+        Nota nota = usuarioService.buscaNotas(usr.getId());
+        if (user != null) {
+            if (!notaEsporte.equals("")) {
+                nota.addNotaEsporte(Long.parseLong(notaEsporte));
+            }
+            notaService.salvaNota(nota);
+
+            return new ModelAndView("redirect:/home");
+        }
+        return new ModelAndView("redirect:/erros");
+    }
+
 
     @GetMapping("/esportesAceitos")
     public ModelAndView esportesAceitosGet() {
@@ -53,7 +77,7 @@ public class EsporteController {
         return mav;
     }
 
-    @PostMapping("/aceitar")
+    @PostMapping("/solicitacoesEsporte")
     public ModelAndView solicitacoesPost(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Esporte e = esporteService.buscarPorId(Integer.parseInt(request.getParameter("EsporteId")));

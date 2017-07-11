@@ -34,6 +34,15 @@ public class Hospedagem implements Serializable {
     @Type(type = "date")
     private Date dataFinal;
     private boolean aprovado;
+    private boolean avaliado;
+
+    public boolean isAvaliado() {
+        return avaliado;
+    }
+
+    public void setAvaliado(boolean avaliado) {
+        this.avaliado = avaliado;
+    }
 
     public Hospedagem() {
     }
@@ -44,7 +53,6 @@ public class Hospedagem implements Serializable {
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
     }
-    
 
     public int getId() {
         return id;
