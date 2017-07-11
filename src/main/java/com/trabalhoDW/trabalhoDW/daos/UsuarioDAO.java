@@ -29,8 +29,8 @@ public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
     @Query("SELECT u FROM Usuario u ORDER BY u.id DESC")
     public List<Usuario> retornaListaOrdenadoPorId();
     
-    @Query("SELECT n from Usuario u, Nota n where n.id = u.nota")
-    public Nota buscaNotas();
+    @Query("SELECT n from Usuario u, Nota n where n.id = u.nota and u.id = ?1")
+    public Nota buscaNotas(int idUser);
 
     @Modifying
     @Transactional

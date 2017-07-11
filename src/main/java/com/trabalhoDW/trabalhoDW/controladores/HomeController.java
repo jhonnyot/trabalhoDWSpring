@@ -39,9 +39,9 @@ public class HomeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
         mav.addObject("userName", "Bem-vindo, " + usr.getNome() + "!");
-        mav.addObject("notaHospedagem", "Nota de Hospedagem: " + usuarioService.buscaNotas().getNotaHospedagem());
-        mav.addObject("notaAmigo", "Nota de Conhecidos: " + usuarioService.buscaNotas().getNotaConhecido());
-        mav.addObject("notaEsporte", "Nota de Prática Esportiva: " + usuarioService.buscaNotas().getNotaEsporte());
+        mav.addObject("notaHospedagem", "Nota de Hospedagem: " + usuarioService.buscaNotas(usr.getId()).getNotaHospedagem());
+        mav.addObject("notaAmigo", "Nota de Conhecidos: " + usuarioService.buscaNotas(usr.getId()).getNotaConhecido());
+        mav.addObject("notaEsporte", "Nota de Prática Esportiva: " + usuarioService.buscaNotas(usr.getId()).getNotaEsporte());
         mav.setViewName("/home");
         return mav;
     }
