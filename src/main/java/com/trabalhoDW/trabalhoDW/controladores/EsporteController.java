@@ -6,7 +6,6 @@
 package com.trabalhoDW.trabalhoDW.controladores;
 
 import com.trabalhoDW.trabalhoDW.modelo.Esporte;
-import com.trabalhoDW.trabalhoDW.modelo.Hospedagem;
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import com.trabalhoDW.trabalhoDW.service.EsporteService;
 import com.trabalhoDW.trabalhoDW.service.UsuarioService;
@@ -33,13 +32,23 @@ public class EsporteController {
     private EsporteService esporteService;
     @Autowired
     private UsuarioService usuarioService;
-    
+
     @GetMapping("/solitacoesEsporte")
     public ModelAndView solicitacoesGet() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
         List<Esporte> solicitacoes = esporteService.listarPorIdSolicitado(usr.getId());
         ModelAndView mav = new ModelAndView("solicitacoesEsporte");
+        mav.addObject("lista", solicitacoes);
+        return mav;
+    }
+
+    @GetMapping("/esportesAceitos")
+    public ModelAndView esportesAceitosGet() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
+        List<Esporte> solicitacoes = esporteService.listarPorIdSolicitado(usr.getId());
+        ModelAndView mav = new ModelAndView("esportesAceitos");
         mav.addObject("lista", solicitacoes);
         return mav;
     }
