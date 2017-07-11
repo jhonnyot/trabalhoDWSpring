@@ -8,6 +8,7 @@ package com.trabalhoDW.trabalhoDW.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -38,7 +39,7 @@ public class Nota implements Serializable {
     private Usuario usuario;
     @OneToMany
     @PrimaryKeyJoinColumn
-    private Avaliacao avaliacao;
+    private Set<Avaliacao> avaliacao;
 
     public void addNotaConhecido(long notaConhecido) {
         this.notaConhecido.add(notaConhecido);

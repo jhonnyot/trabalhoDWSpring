@@ -20,6 +20,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
@@ -44,7 +45,8 @@ public class Usuario implements Serializable {
     @JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
     private Set<Papel> papel;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "hospedagem", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "hospedagem_id"))
+    @PrimaryKeyJoinColumn
+//    @JoinTable(name = "hospedagem", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "hospedagem_id"))
     private Set<Hospedagem> hospedagens;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Usuario> amigos;

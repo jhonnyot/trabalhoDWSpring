@@ -59,7 +59,7 @@ public class HospedagemController {
         Hospedagem h = hospedagemService.buscarPorId(Integer.parseInt(request.getParameter("hospedagemId")));
         h.setAprovado(true);
         hospedagemService.salvar(h);
-        ModelAndView mav = new ModelAndView("hospedagem");
+        ModelAndView mav = new ModelAndView("redirect:/hospedeiro");
         return mav;
     }
 
@@ -81,7 +81,7 @@ public class HospedagemController {
         Hospedagem hospedagem = new Hospedagem(numeroHospedes, numeroEsportistas, dataInicial, dataFinal);
         hospedagem.setIdHospedeiro(u.getId());
         hospedagemService.salvar(hospedagem);
-        ModelAndView mav = new ModelAndView("hospedeiro");
+        ModelAndView mav = new ModelAndView("redirect:/home");
         return mav;
     }
 
