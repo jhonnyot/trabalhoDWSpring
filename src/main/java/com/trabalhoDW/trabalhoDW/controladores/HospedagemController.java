@@ -43,7 +43,17 @@ public class HospedagemController {
         return mav;
     }
 
-    @PostMapping("/hospedeiro")
+    @GetMapping("/hospedagensAceitas")
+    public ModelAndView hospedagensAceitasGet() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
+        List<Hospedagem> solicitacoes = hospedagemService.buscarPorIdHospedeiro(usr.getId());
+        ModelAndView mav = new ModelAndView("hospedeiro");
+        mav.addObject("lista", solicitacoes);
+        return mav;
+    }
+
+    @PostMapping("/aceitar")
     public ModelAndView hospedeiroPost(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Hospedagem h = hospedagemService.buscarPorId(Integer.parseInt(request.getParameter("hospedagemId")));
