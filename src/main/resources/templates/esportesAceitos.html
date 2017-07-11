@@ -20,14 +20,16 @@
                                 <h1>Solicitações de Saída</h1>
                             </div>
                             <span th:each="esp : ${lista}">
-                                <form th:if="${esp.aprovado} != true" method="POST" th:action="@{/solicitacoesEsporte}">
+                                <form th:if="${esp.aprovado} != false" method="POST" th:action="@{/esportesAceitos}">
                                     <label>Identificação:</label>
                                     <input type="text" id="solicitacaoId" name="solicitacaoId" th:attr="value = ${esp.id}" readonly="readonly"/><br/>
                                     <label>Nome do Solicitante</label>
                                     <span th:text="${esp.nomeSolicitante}"/><br/>
                                     <label>Data Início</label>
                                     <span th:text="${esp.data}"/><br/>
-                                    <button type="submit" name="aceitar" id="aceitar" class="btn btn-primary">Aceitar</button>
+                                    <label>Nota (de 1 a 5)</label>
+                                    <input type="text" id="notaEsporte" name ="notaEsporte"/>
+                                    <button type="submit" name="aceitar" id="aceitar" class="btn btn-primary">Avaliar</button>
                                 </form>
                             </span>
                         </div>
