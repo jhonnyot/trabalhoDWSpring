@@ -43,6 +43,9 @@ public class Usuario implements Serializable {
     @JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
     Set<Papel> papel;
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "hospedagem", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "hospedagem_id"))
+    Set<Hospedagem> hospedagens;
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Usuario> amigos;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Usuario> amigoshospedados;

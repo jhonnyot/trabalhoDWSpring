@@ -9,7 +9,6 @@ import com.trabalhoDW.trabalhoDW.modelo.Hospedagem;
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
 import com.trabalhoDW.trabalhoDW.service.HospedagemService;
 import com.trabalhoDW.trabalhoDW.service.UsuarioService;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -38,36 +37,42 @@ public class HospedagemController {
     public ModelAndView hospedeiroGet() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
-        Date dataInicial = new Date();
-        Date dataFinal = new Date();
-        dataInicial = Calendar.getInstance().getTime();
-        dataFinal = Calendar.getInstance().getTime();
-        Hospedagem hosp1 = new Hospedagem();
-        hosp1.setDataInicial(dataInicial);
-        hosp1.setDataFinal(dataFinal);
-        hosp1.setIdHospedeiro(usr.getId());
-        hosp1.setNumeroEsportistas(5);
-        hosp1.setNumeroHospedes(5);
-        hospedagemService.salvar(hosp1);        
-        
         List<Hospedagem> solicitacoes = hospedagemService.buscarPorIdHospedeiro(usr.getId());
         ModelAndView mav = new ModelAndView("hospedeiro");
         mav.addObject("lista", solicitacoes);
         return mav;
     }
 
-//    @PostMapping("/aceitar")
-//    public ModelAndView hospedeiroPost(HttpServletRequest request, HttpServletResponse response) {
-//
-//    }
+    @PostMapping("/aceitar")
+    public ModelAndView hospedeiroPost(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Hospedagem h = hospedagemService.buscarPorId(Integer.parseInt(request.getParameter("hospedagemId")));
+        h.setAprovado(true);
+        hospedagemService.salvar(h);
+        ModelAndView mav = new ModelAndView("hospedagem");
+        return mav;
+    }
+
     @GetMapping("/hospedagem")
     public ModelAndView hospedagemGet() {
-        return null;
+        ModelAndView mav = new ModelAndView("hospedagem");
+        return mav;
     }
 
     @PostMapping("/hospedagem")
     public ModelAndView hospedagemPost(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int numeroHospedes = Integer.parseInt(request.getParameter("numeroHospedes"));
+        int numeroEsportistas = Integer.parseInt(request.getParameter("numeroEsportistas"));
+        Date dataInicial = new Date(request.getParameter("dataInicial"));
+        Date dataFinal = new Date(request.getParameter("dataFinal"));
+        String nomeHospedeiro = request.getParameter("nomeHospedeiro");
+        Usuario u = usuarioService.buscarPorNome(nomeHospedeiro);
+        Hospedagem hospedagem = new Hospedagem(numeroHospedes, numeroEsportistas, dataInicial, dataFinal);
+        hospedagem.setIdHospedeiro(u.getId());
+        hospedagemService.salvar(hospedagem);
+        ModelAndView mav = new ModelAndView("hospedeiro");
+        return mav;
     }
 
 }

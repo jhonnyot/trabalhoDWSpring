@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -35,6 +36,9 @@ public class Nota implements Serializable {
     @OneToOne
     @PrimaryKeyJoinColumn
     private Usuario usuario;
+    @OneToMany
+    @PrimaryKeyJoinColumn
+    private Avaliacao avaliacao;
 
     public void addNotaConhecido(long notaConhecido) {
         this.notaConhecido.add(notaConhecido);

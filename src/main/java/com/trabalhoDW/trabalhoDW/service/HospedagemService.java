@@ -24,7 +24,9 @@ public class HospedagemService {
     public List<Hospedagem> buscarPorIdHospedeiro(int idHospedeiro) {
         return hospedagemDAO.buscarPorIdHospedeiro(idHospedeiro);
     }
-
+    public Hospedagem buscarPorId(int id){
+        return hospedagemDAO.findOne(id);
+    }
     public Hospedagem salvar(Hospedagem h) {
         return hospedagemDAO.save(h);
     }
