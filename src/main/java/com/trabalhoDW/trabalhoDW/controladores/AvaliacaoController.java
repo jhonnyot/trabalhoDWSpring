@@ -54,7 +54,7 @@ public class AvaliacaoController {
         String notaConhecido = request.getParameter("notaConhecido");
         String usuario = request.getParameter("username");
         Usuario user = usuarioService.buscarPorNome(usuario);
-        Nota nota = usuarioService.buscaNotas();
+        Nota nota = usuarioService.buscaNotas(usr.getId());
         if (user != null) {
             if (!notaConhecido.equals("")) {
                 nota.addNotaConhecido(Long.parseLong(notaConhecido));

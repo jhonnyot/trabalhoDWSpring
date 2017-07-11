@@ -55,8 +55,8 @@ public class UsuarioService {
         usuarioDAO.saveAndFlush(usuario);
     }
     
-    public Nota buscaNotas() {
-       return usuarioDAO.buscaNotas();
+    public Nota buscaNotas(int userId) {
+       return usuarioDAO.buscaNotas(userId);
     }
 
     public boolean loginValido(int id, String senha) {
