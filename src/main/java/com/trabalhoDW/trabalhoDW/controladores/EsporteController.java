@@ -34,7 +34,7 @@ public class EsporteController {
     @Autowired
     private UsuarioService usuarioService;
     
-    @GetMapping("/solitacoesEsporte")
+    @GetMapping("/solicitacoesEsporte")
     public ModelAndView solicitacoesGet() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
@@ -47,10 +47,10 @@ public class EsporteController {
     @PostMapping("/aceitar")
     public ModelAndView solicitacoesPost(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Esporte e = esporteService.buscarPorId(Integer.parseInt(request.getParameter("EsporteId")));
+        Esporte e = esporteService.buscarPorId(Integer.parseInt(request.getParameter("solicitacaoId")));
         e.setAprovado(true);
         esporteService.salvar(e);
-        ModelAndView mav = new ModelAndView("solicitacoesEsporte");
+        ModelAndView mav = new ModelAndView("redirect:/solicitacoesEsporte");
         return mav;
     }
 
@@ -67,10 +67,11 @@ public class EsporteController {
         Date dataInicial = new Date(request.getParameter("dataInicial"));
         Usuario u = usuarioService.buscarPorNome(nomeAlvo);
         int idSolicitante = usuarioService.buscarPorId(Integer.parseInt(auth.getName())).getId();
+        String nomeSolicitante = usuarioService.buscarPorId(idSolicitante).getNome();
         int idSolicitado = u.getId();
-        Esporte esporte = new Esporte(dataInicial, idSolicitante, idSolicitado);
+        Esporte esporte = new Esporte(dataInicial, idSolicitante, idSolicitado, nomeSolicitante);
         esporteService.salvar(esporte);
-        ModelAndView mav = new ModelAndView("home");
+        ModelAndView mav = new ModelAndView("redirect:/home");
         return mav;
     }
 }

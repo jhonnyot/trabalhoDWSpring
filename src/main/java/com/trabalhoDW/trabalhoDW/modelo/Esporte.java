@@ -28,6 +28,7 @@ public class Esporte implements Serializable {
     private String nome = "Surf";
     @Type(type = "date")
     private Date data;
+    private String nomeSolicitante;
     private int idSolicitante;
     private int idSolicitado;
     private boolean aprovado;
@@ -35,10 +36,15 @@ public class Esporte implements Serializable {
     public Esporte() {
     }
 
-    public Esporte(Date data, int idSolicitante, int idSolicitado) {
+    public Esporte(Date data, int idSolicitante, int idSolicitado, String nome) {
         this.data = data;
         this.idSolicitante = idSolicitante;
         this.idSolicitado = idSolicitado;
+        this.nomeSolicitante = nome;
+    }
+
+    public String getNomeSolicitante() {
+        return nomeSolicitante;
     }
 
     public int getId() {
