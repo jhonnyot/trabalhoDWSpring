@@ -32,7 +32,7 @@ public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
     @Query("SELECT n from Usuario u, Nota n where n.id = u.nota and u.id = ?1")
     public Nota buscaNotas(int idUser);
     
-    @Query("SELECT u from Usuario u where u.cidade = ?1")
+    @Query("SELECT u from Usuario u where u.cidade like %?1%")
     public List<Usuario> listarPorCidade(String cidade);
 
     @Modifying

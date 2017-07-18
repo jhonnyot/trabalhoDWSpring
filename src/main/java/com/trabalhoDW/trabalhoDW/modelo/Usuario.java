@@ -166,6 +166,14 @@ public class Usuario implements Serializable {
         this.nota = nota;
     }
 
+    public String getPais() {
+        return pais;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

@@ -21,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -95,7 +96,7 @@ public class HospedagemController {
         return mav;
     }
 
-    @PostMapping("/hospedagem")
+    @PostMapping(value = "/hospedagem", params = {"numeroHospedes", "numeroEsportistas", "dataInicial", "dataFinal", "nomeHospedeiro"})
     public ModelAndView hospedagemPost(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         int numeroHospedes = Integer.parseInt(request.getParameter("numeroHospedes"));
@@ -111,7 +112,7 @@ public class HospedagemController {
         return mav;
     }
 
-    @PostMapping("/buscaHospedagemPorCidade")
+    @PostMapping(value = "/hospedagem", params = "cidade")
     public ModelAndView buscaHospedagemPorCidadePost(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String cidade = request.getParameter("cidade");
@@ -120,5 +121,5 @@ public class HospedagemController {
         mav.addObject("usuariosPorCidade", usuariosPorCidade);
         return mav;
     }
-    
+
 }

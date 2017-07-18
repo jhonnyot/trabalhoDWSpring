@@ -16,29 +16,34 @@
         </div> 
         <div th:replace="erros :: erros"/>
         <div th:replace="cabecalhoLogado :: cabecalhoLogado"/>
+        <form method="post" role="form" th:action="@{/hospedagem}">
+            <div class="form-group">
+                <label>Cidade:</label>
+                <input type="text" class="form-control" id="cidade" placeholder="Insira a cidade de destino" name="cidade"/>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+        </form><br/><br/>
         <form method="post" role="form" th:action="@{/hospedagem.html}">
-            <div class="form-group">
-                <label for="nomeHospedeiro">Nome do hospedeiro: </label>
-                <input type="text" class="form-control" id="nomeHospedeiro" placeholder="Nome do Hospedeiro" name="nomeHospedeiro"/>
-            </div>
-            <div class="form-group">
                 <label for="numeroHospedes">Numero de hospedes: </label>
-                <input type="text" class="form-control" id="numeroHospedes" placeholder="Numero de Hospedes" name="numeroHospedes"/>
-            </div>
-            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Numero de Hospedes" name="numeroHospedes"/>
                 <label for="numeroEsportistas">Numero de praticantes de esporte:</label>
-                <input type="text" class="form-control" id="numeroEsportistas" placeholder="Numero de Esportistas" name="numeroEsportistas"/>
-            </div>
-            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Numero de Esportistas" name="numeroEsportistas"/>
                 <label for="dataInicial">Data Inicial (MM/DD/AAAA)</label>
-                <input type="text" class="form-control" id="dataInicial" placeholder="Data de Início" name="dataInicial"/>
-            </div>
-            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Data de Início" name="dataInicial"/>
                 <label for="dataFinal">Data Final (MM/DD/AAAA) </label>
-                <input type="text" class="form-control" id="dataFinal" placeholder="Data Final" name="dataFinal"/>
+                <input type="text" class="form-control" placeholder="Data Final" name="dataFinal"/>
+            <div th:each="user : ${usuariosPorCidade}">
+                <label>Nome:</label>
+                <input type="text" id="nomeHospedeiro" th:attr="value = ${user.nome}" readonly="readonly"/><br/>
+                <label>Cidade:</label>
+                <span th:text="${user.cidade}"/><br/>
+                <label>Endereço:</label>
+                <span th:text="${user.endereco}"/><br/>
+                <label>País:</label>
+                <span th:text="${user.pais}"/><br/>
+                <button type="submit" class="btn btn-primary">Pedir Hospedagem</button>
+                <br/><br/>
             </div>
-
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
     </body>
 </html>
