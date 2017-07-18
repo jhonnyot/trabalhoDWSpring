@@ -62,15 +62,15 @@ public class HospedagemController {
     public ModelAndView avaliacao(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
-        String notaEsporte = request.getParameter("notaHospedagem");
+        String notaHospedagem = request.getParameter("notaHospedagem");
         String usuario = request.getParameter("username");
         int hospId = Integer.parseInt(request.getParameter("hospedagemId"));
         Usuario user = usuarioService.buscarPorNome(usuario);
         Nota nota = usuarioService.buscaNotas(usr.getId());
         Hospedagem h = hospedagemService.buscarPorId(hospId);
         if (user != null) {
-            if (!notaEsporte.equals("")) {
-                nota.addNotaEsporte(Long.parseLong(notaEsporte));
+            if (!notaHospedagem.equals("")) {
+                nota.addNotaHospedagem(Long.parseLong(notaHospedagem));
                 h.setAvaliado(true);
             }
             notaService.salvaNota(nota);

@@ -58,6 +58,15 @@ public class Usuario implements Serializable {
     private boolean isDisponivel;
     private String pais;
     private String cidade;
+    private boolean avaliado;
+
+    public boolean isAvaliado() {
+        return avaliado;
+    }
+
+    public void setAvaliado(boolean avaliado) {
+        this.avaliado = avaliado;
+    }
 
     public Usuario() {
     }
