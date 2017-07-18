@@ -27,6 +27,15 @@ public class Hospedagem implements Serializable {
     @Column(name = "hospedagem_id")
     private int id;
     private int idHospedeiro;
+    private int idHospede;
+
+    public int getIdHospede() {
+        return idHospede;
+    }
+
+    public void setIdHospede(int idHospede) {
+        this.idHospede = idHospede;
+    }
     private int numeroHospedes;
     private int numeroEsportistas;
     @Type(type = "date")

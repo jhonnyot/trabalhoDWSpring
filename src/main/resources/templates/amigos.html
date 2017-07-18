@@ -18,7 +18,13 @@
                             <h1 th:text="${userName}"></h1>
                             <h3>Estes são seus amigos:</h3>
                             <span th:each="amg : ${amigos}">
-                                <p th:text="${amg.nome}"></p>
+                                <form method="POST" th:action="@{/amigos}">
+                                    <input type="text" name="username" id="username" th:attr="value = ${amg.nome}" readonly="readonly"/><br/>
+
+                                    <label th:if="${amg.avaliado} == false">Nota (de 1 a 5)</label>
+                                    <input th:if="${amg.avaliado} == false" type="text" id="notaConhecido" name ="notaConhecido"/>
+                                    <button th:if="${amg.avaliado} == false" type="submit" name="aceitar" id="aceitar" class="btn btn-primary">Avaliar</button>
+                                </form>
                             </span>
                         </div> 
                     </div>

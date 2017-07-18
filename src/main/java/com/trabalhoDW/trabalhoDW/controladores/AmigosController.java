@@ -5,9 +5,9 @@
  */
 package com.trabalhoDW.trabalhoDW.controladores;
 
-import com.trabalhoDW.trabalhoDW.modelo.Hospedagem;
 import com.trabalhoDW.trabalhoDW.modelo.Nota;
 import com.trabalhoDW.trabalhoDW.modelo.Usuario;
+import com.trabalhoDW.trabalhoDW.service.NotaService;
 import com.trabalhoDW.trabalhoDW.service.UsuarioService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +28,8 @@ public class AmigosController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private NotaService notaService;
 
     @GetMapping("/amigos")
     public ModelAndView amigos() {
@@ -45,14 +47,14 @@ public class AmigosController {
         String notaConhecido = request.getParameter("notaConhecido");
         String usuario = request.getParameter("username");
         Usuario avaliado = usuarioService.buscarPorNome(usuario);
-        Nota nota = usuarioService.buscaNotas(avaliador.getId());
+        Nota nota = usuarioService.buscaNotas(avaliado.getId());
 
         if (avaliado != null) {
             if (!notaConhecido.equals("")) {
                 nota.addNotaConhecido(Long.parseLong(notaConhecido));
                 avaliado.setAvaliado(true);
             }
-            usuarioService.salvaUsuario(avaliado);
+            notaService.salvaNota(nota);
 
             return new ModelAndView("redirect:/home");
         }

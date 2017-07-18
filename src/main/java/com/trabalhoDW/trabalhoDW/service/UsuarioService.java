@@ -54,7 +54,7 @@ public class UsuarioService {
         usuario.setNota(nota);
         usuarioDAO.saveAndFlush(usuario);
     }
-
+    
     public Nota buscaNotas(int userId) {
         return usuarioDAO.buscaNotas(userId);
     }

@@ -32,7 +32,7 @@
                 <input type="text" class="form-control" placeholder="Data de Início" name="dataInicial"/>
                 <label for="dataFinal">Data Final (MM/DD/AAAA) </label>
                 <input type="text" class="form-control" placeholder="Data Final" name="dataFinal"/>
-            <div th:each="user : ${usuariosPorCidade}">
+            <div th:each="user : ${usuariosPorCidade}" th:if="${user.id} != ${meuId}">
                 <label>Nome:</label>
                 <input type="text" name="nomeHospedeiro" th:attr="value = ${user.nome}" readonly="readonly"/><br/>
                 <label>Cidade:</label>

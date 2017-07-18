@@ -31,9 +31,9 @@
                                     <span th:text="${hosp.dataInicial}"/><br/>
                                     <label>Data Fim</label>
                                     <span th:text="${hosp.dataFinal}"/><br/>
-                                    <label th:if="${esp.avaliado} == false">Nota (de 1 a 5)</label>
-                                    <input th:if="${esp.avaliado} == false" type="text" id="notaHospedagem" name ="notaEsporte"/>
-                                    <button th:if="${esp.avaliado} == false" type="submit" name="aceitar" id="aceitar" class="btn btn-primary">Avaliar</button>
+                                    <label th:if="${hosp.avaliado} == false">Nota (de 1 a 5)</label>
+                                    <input th:if="${hosp.avaliado} == false" type="text" id="notaHospedagem" name ="notaHospedagem"/>
+                                    <button th:if="${hosp.avaliado} == false" type="submit" name="aceitar" id="aceitar" class="btn btn-primary">Avaliar</button>
                                 </form>
                             </span>
                         </div>

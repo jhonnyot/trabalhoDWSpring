@@ -63,11 +63,10 @@ public class HospedagemController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
         String notaHospedagem = request.getParameter("notaHospedagem");
-        String usuario = request.getParameter("username");
         int hospId = Integer.parseInt(request.getParameter("hospedagemId"));
-        Usuario user = usuarioService.buscarPorNome(usuario);
-        Nota nota = usuarioService.buscaNotas(usr.getId());
         Hospedagem h = hospedagemService.buscarPorId(hospId);
+        Usuario user = usuarioService.buscarPorId(h.getIdHospede());
+        Nota nota = usuarioService.buscaNotas(user.getId());
         if (user != null) {
             if (!notaHospedagem.equals("")) {
                 nota.addNotaHospedagem(Long.parseLong(notaHospedagem));
@@ -107,6 +106,7 @@ public class HospedagemController {
         Usuario u = usuarioService.buscarPorNome(nomeHospedeiro);
         Hospedagem hospedagem = new Hospedagem(numeroHospedes, numeroEsportistas, dataInicial, dataFinal);
         hospedagem.setIdHospedeiro(u.getId());
+        hospedagem.setIdHospede(Integer.parseInt(auth.getName()));
         hospedagemService.salvar(hospedagem);
         ModelAndView mav = new ModelAndView("redirect:/home");
         return mav;
@@ -119,6 +119,7 @@ public class HospedagemController {
         List<Usuario> usuariosPorCidade = usuarioService.listarPorCidade(cidade);
         ModelAndView mav = new ModelAndView();
         mav.addObject("usuariosPorCidade", usuariosPorCidade);
+        mav.addObject("meuId", auth.getName());
         return mav;
     }
 
