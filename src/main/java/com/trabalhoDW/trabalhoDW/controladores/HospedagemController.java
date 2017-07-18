@@ -71,7 +71,7 @@ public class HospedagemController {
                 nota.addNotaEsporte(Long.parseLong(notaEsporte));
             }
             notaService.salvaNota(nota);
-            
+
             return new ModelAndView("redirect:/home");
         }
         return new ModelAndView("redirect:/erros");
@@ -109,4 +109,14 @@ public class HospedagemController {
         return mav;
     }
 
+    @PostMapping("/buscaHospedagemPorCidade")
+    public ModelAndView buscaHospedagemPorCidadePost(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String cidade = request.getParameter("cidade");
+        List<Usuario> usuariosPorCidade = usuarioService.listarPorCidade(cidade);
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("usuariosPorCidade", usuariosPorCidade);
+        return mav;
+    }
+    
 }

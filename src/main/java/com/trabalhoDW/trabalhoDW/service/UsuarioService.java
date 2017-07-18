@@ -54,9 +54,9 @@ public class UsuarioService {
         usuario.setNota(nota);
         usuarioDAO.saveAndFlush(usuario);
     }
-    
+
     public Nota buscaNotas(int userId) {
-       return usuarioDAO.buscaNotas(userId);
+        return usuarioDAO.buscaNotas(userId);
     }
 
     public boolean loginValido(int id, String senha) {
@@ -64,6 +64,10 @@ public class UsuarioService {
             return true;
         }
         return false;
+    }
+
+    public List<Usuario> listarPorCidade(String cidade) {
+        return usuarioDAO.listarPorCidade(cidade);
     }
 
     public Usuario buscarPorNome(String nome) {
