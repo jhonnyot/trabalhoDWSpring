@@ -34,7 +34,7 @@
                 <input type="text" class="form-control" placeholder="Data Final" name="dataFinal"/>
             <div th:each="user : ${usuariosPorCidade}">
                 <label>Nome:</label>
-                <input type="text" id="nomeHospedeiro" th:attr="value = ${user.nome}" readonly="readonly"/><br/>
+                <input type="text" name="nomeHospedeiro" th:attr="value = ${user.nome}" readonly="readonly"/><br/>
                 <label>Cidade:</label>
                 <span th:text="${user.cidade}"/><br/>
                 <label>Endereço:</label>
