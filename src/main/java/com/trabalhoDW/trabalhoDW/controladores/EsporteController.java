@@ -53,13 +53,17 @@ public class EsporteController {
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
         String notaEsporte = request.getParameter("notaEsporte");
         String usuario = request.getParameter("username");
+        int esporteId = Integer.parseInt(request.getParameter("solicitacaoId"));
         Usuario user = usuarioService.buscarPorNome(usuario);
-        Nota nota = usuarioService.buscaNotas(usr.getId());
+        Nota nota = usuarioService.buscaNotas(user.getId());
+        Esporte esporte = esporteService.buscarPorId(esporteId);
         if (user != null) {
             if (!notaEsporte.equals("")) {
                 nota.addNotaEsporte(Long.parseLong(notaEsporte));
+                esporte.setAvaliado(true);
             }
             notaService.salvaNota(nota);
+            esporteService.salvar(esporte);
 
             return new ModelAndView("redirect:/home");
         }

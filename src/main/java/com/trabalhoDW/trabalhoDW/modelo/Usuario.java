@@ -46,7 +46,6 @@ public class Usuario implements Serializable {
     private Set<Papel> papel;
     @OneToMany(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-//    @JoinTable(name = "hospedagem", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "hospedagem_id"))
     private Set<Hospedagem> hospedagens;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Usuario> amigos;

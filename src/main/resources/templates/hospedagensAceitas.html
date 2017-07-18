@@ -17,10 +17,10 @@
                         <div th:replace="cabecalhoLogado :: cabecalhoLogado"/>
                         <div class="list-group">
                             <div class="page-header">
-                                <h1>Solicitações de Hospedagem</h1>
+                                <h1>Hospedagens Aceitas</h1>
                             </div>
                             <span th:each="hosp : ${lista}">
-                                <form th:if="${hosp.aprovado} != true" method="POST" th:action="@{/hospedagensAceitas}">
+                                <form th:if="${hosp.aprovado} != false" method="POST" th:action="@{/hospedagensAceitas}">
                                     <label>Identificação:</label>
                                     <input type="text" id="hospedagemId" name="hospedagemId" th:attr="value = ${hosp.id}" readonly="readonly"/><br/>
                                     <label>Número de Hóspedes</label>
@@ -31,9 +31,9 @@
                                     <span th:text="${hosp.dataInicial}"/><br/>
                                     <label>Data Fim</label>
                                     <span th:text="${hosp.dataFinal}"/><br/>
-                                    <label>Nota (de 1 a 5)</label>
-                                    <input type="text" id="notaHospedagem" name ="notaEsporte"/>
-                                    <button type="submit" name="aceitar" id="aceitar" class="btn btn-primary">Avaliar</button>
+                                    <label th:if="${esp.avaliado} == false">Nota (de 1 a 5)</label>
+                                    <input th:if="${esp.avaliado} == false" type="text" id="notaHospedagem" name ="notaEsporte"/>
+                                    <button th:if="${esp.avaliado} == false" type="submit" name="aceitar" id="aceitar" class="btn btn-primary">Avaliar</button>
                                 </form>
                             </span>
                         </div>

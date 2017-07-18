@@ -17,19 +17,19 @@
                         <div th:replace="cabecalhoLogado :: cabecalhoLogado"/>
                         <div class="list-group">
                             <div class="page-header">
-                                <h1>Solicitações de Saída</h1>
+                                <h1>Solicitações de Saída Aceitas</h1>
                             </div>
                             <span th:each="esp : ${lista}">
                                 <form th:if="${esp.aprovado} != false" method="POST" th:action="@{/esportesAceitos}">
                                     <label>Identificação:</label>
                                     <input type="text" id="solicitacaoId" name="solicitacaoId" th:attr="value = ${esp.id}" readonly="readonly"/><br/>
                                     <label>Nome do Solicitante</label>
-                                    <span th:text="${esp.nomeSolicitante}"/><br/>
+                                    <input type="text" id="solicitacaoId" name="username" th:attr="value = ${esp.nomeSolicitante}" readonly="readonly"/><br/>
                                     <label>Data Início</label>
                                     <span th:text="${esp.data}"/><br/>
-                                    <label>Nota (de 1 a 5)</label>
-                                    <input type="text" id="notaEsporte" name ="notaEsporte"/>
-                                    <button type="submit" name="aceitar" id="aceitar" class="btn btn-primary">Avaliar</button>
+                                    <label th:if="${esp.avaliado} == false">Nota (de 1 a 5)</label>
+                                    <input th:if="${esp.avaliado} == false" type="text" id="notaEsporte" name ="notaEsporte"/>
+                                    <button th:if="${esp.avaliado} == false" type="submit" name="aceitar" id="aceitar" class="btn btn-primary">Avaliar</button>
                                 </form>
                             </span>
                         </div>

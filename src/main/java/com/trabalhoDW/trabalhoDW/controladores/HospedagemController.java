@@ -52,7 +52,7 @@ public class HospedagemController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
         List<Hospedagem> solicitacoes = hospedagemService.buscarPorIdHospedeiro(usr.getId());
-        ModelAndView mav = new ModelAndView("hospedeiro");
+        ModelAndView mav = new ModelAndView("hospedagensAceitas");
         mav.addObject("lista", solicitacoes);
         return mav;
     }
@@ -63,21 +63,24 @@ public class HospedagemController {
         Usuario usr = usuarioService.buscarPorId(Integer.parseInt(auth.getName()));
         String notaEsporte = request.getParameter("notaHospedagem");
         String usuario = request.getParameter("username");
+        int hospId = Integer.parseInt(request.getParameter("hospedagemId"));
         Usuario user = usuarioService.buscarPorNome(usuario);
         Nota nota = usuarioService.buscaNotas(usr.getId());
-        Hospedagem h = new Hospedagem();
+        Hospedagem h = hospedagemService.buscarPorId(hospId);
         if (user != null) {
             if (!notaEsporte.equals("")) {
                 nota.addNotaEsporte(Long.parseLong(notaEsporte));
+                h.setAvaliado(true);
             }
             notaService.salvaNota(nota);
+            hospedagemService.salvar(h);
             
             return new ModelAndView("redirect:/home");
         }
         return new ModelAndView("redirect:/erros");
     }
 
-    @PostMapping("/aceitar")
+    @PostMapping("/hospedeiro")
     public ModelAndView hospedeiroPost(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Hospedagem h = hospedagemService.buscarPorId(Integer.parseInt(request.getParameter("hospedagemId")));
